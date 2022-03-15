@@ -21,6 +21,17 @@ class button:
         self.lastpressed = self.btn.value
 
 
+class switch:
+    def __init__(self, pin, keycode):
+        self.keycode = keycode
+        self.switch = digitalio.DigitalInOut(pin)
+        self.switch.direction = digitalio.Direction.INPUT
+        self.switch.pull = digitalio.Pull.DOWN
+
+    def update(self):
+        keyboard.send(self.keycode)
+
+
 keyboard = Keyboard(usb_hid.devices)
 
 supervisor.disable_autoreload()
@@ -35,7 +46,11 @@ buttons = [
     button(board.GP21, Keycode.KEYPAD_SIX),
 ]
 
+switches = []
+
 while True:
     for b in buttons:
         b.update()
+    # for s in switches:
+    #    s.update()
     time.sleep(0.001)

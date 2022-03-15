@@ -8,3 +8,4 @@
 /._boot_out.txt
 /.vscode
 /System Volume Information
+lib/**/._*
